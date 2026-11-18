@@ -101,7 +101,30 @@ function removerSessao(item, chave) {
 /* ---------------------------- Manipulador do evento ---------------------------- */
 
 function onMessageSendHandler(event) {
-  var item = Office.context.mailbox.item;
+  // Garante uma única resposta ao Outlook, mesmo em caso de erro ou demora.
+  var concluido = false;
+  var original = event.completed.bind(event);
+  event = {
+    completed: function (opcoes) {
+      if (concluido) return;
+      concluido = true;
+      original(opcoes);
+    }
+  };
+  setTimeout(function () {
+    if (!concluido) {
+      console.error("Conferência de cadastro: tempo esgotado ao analisar o e-mail.");
+      event.completed({ allowEvent: true });
+    }
+  }, 20000);
+
+  var item;
+  try {
+    item = Office.context.mailbox.item;
+  } catch (e) {
+    event.completed({ allowEvent: true });
+    return;
+  }
 
   Promise.all([lerAssunto(item), lerCorpo(item)])
     .then(function (valores) {
@@ -158,7 +181,6 @@ function bloquearEnvio(event) {
 /* --------------------------------- Registro ---------------------------------- */
 
 if (typeof Office !== "undefined" && Office.actions) {
-  Office.onReady(function () {});
   Office.actions.associate("onMessageSendHandler", onMessageSendHandler);
 }
 
