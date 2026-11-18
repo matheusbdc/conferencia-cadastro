@@ -60,9 +60,12 @@ function encontrarPalavrasChave(assunto, corpo) {
 
 /* ---------- Helpers que transformam callbacks do Office.js em Promises ---------- */
 
-function officeAsync(fn) {
+// Cada chamada ao Outlook tem limite de tempo: se não responder, segue o fluxo com erro.
+function officeAsync(fn, limiteMs) {
   return new Promise(function (resolve, reject) {
+    var timer = setTimeout(function () { reject(new Error("timeout")); }, limiteMs || 4000);
     fn(function (result) {
+      clearTimeout(timer);
       if (result.status === Office.AsyncResultStatus.Succeeded) {
         resolve(result.value);
       } else {
@@ -116,7 +119,7 @@ function onMessageSendHandler(event) {
       console.error("Conferência de cadastro: tempo esgotado ao analisar o e-mail.");
       event.completed({ allowEvent: true });
     }
-  }, 20000);
+  }, 10000);
 
   var item;
   try {
