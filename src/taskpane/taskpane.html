@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Conferência de cadastro</title>
+  <script type="text/javascript" src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+  <link rel="stylesheet" href="taskpane.css" />
+</head>
+<body>
+  <main class="card" aria-labelledby="titulo">
+    <header class="card__header">
+      <span class="card__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="5" y="4" width="14" height="17" rx="2" />
+          <path d="M9 4.5V3h6v1.5" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+      </span>
+      <h1 id="titulo">Conferência de cadastro</h1>
+    </header>
+
+    <p class="card__lead">
+      Este e-mail parece tratar de cadastro ou inserção. Antes de enviar, confirme:
+    </p>
+
+    <p class="keywords" id="keywords" hidden></p>
+
+    <fieldset class="checklist" id="checklist">
+      <legend class="sr-only">Conferências obrigatórias</legend>
+
+      <label class="check">
+        <input type="checkbox" name="conferencia" value="cadastro" required />
+        <span class="check__box" aria-hidden="true"></span>
+        <span class="check__text">Cadastro conferido</span>
+      </label>
+
+      <label class="check">
+        <input type="checkbox" name="conferencia" value="monitoramento" required />
+        <span class="check__box" aria-hidden="true"></span>
+        <span class="check__text">Monitoramento conferido</span>
+      </label>
+
+      <label class="check">
+        <input type="checkbox" name="conferencia" value="publicacoes" required />
+        <span class="check__box" aria-hidden="true"></span>
+        <span class="check__text">Publicações anteriores conferidas</span>
+      </label>
+    </fieldset>
+
+    <div class="progress" aria-hidden="true">
+      <div class="progress__bar"><span id="progressFill"></span></div>
+      <span class="progress__label" id="progressLabel">0 de 3</span>
+    </div>
+
+    <div class="alert" id="alert" role="alert" hidden></div>
+
+    <div class="actions">
+      <button type="button" class="btn btn--primary" id="btnEnviar">Enviar e-mail</button>
+      <button type="button" class="btn btn--secondary" id="btnRevisar">Revisar antes de enviar</button>
+    </div>
+  </main>
+
+  <script type="text/javascript" src="taskpane.js"></script>
+</body>
+</html>

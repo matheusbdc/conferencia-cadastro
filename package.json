@@ -1,0 +1,13 @@
+{
+  "name": "outlook-conferencia-cadastro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Suplemento do Outlook (Smart Alerts / OnMessageSend) que exige conferências antes de enviar e-mails sobre cadastro ou inserção.",
+  "scripts": {
+    "certs": "npx --yes office-addin-dev-certs install",
+    "start": "npx --yes http-server . -p 3000 -S -C %USERPROFILE%/.office-addin-dev-certs/localhost.crt -K %USERPROFILE%/.office-addin-dev-certs/localhost.key --cors -c-1",
+    "start:unix": "npx --yes http-server . -p 3000 -S -C ~/.office-addin-dev-certs/localhost.crt -K ~/.office-addin-dev-certs/localhost.key --cors -c-1",
+    "validate": "npx --yes office-addin-manifest validate manifest.xml",
+    "test": "node --test \"tests/*.test.js\""
+  }
+}
