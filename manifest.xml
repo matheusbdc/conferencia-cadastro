@@ -11,7 +11,7 @@
   xsi:type="MailApp">
 
   <Id>42b1e8e1-78cb-4db8-a176-333c7e121181</Id>
-  <Version>1.0.0.0</Version>
+  <Version>1.0.1.0</Version>
   <ProviderName>Equipe de Cadastro</ProviderName>
   <DefaultLocale>pt-BR</DefaultLocale>
   <DisplayName DefaultValue="Conferência de cadastro"/>
@@ -102,7 +102,7 @@
               <LaunchEvents>
                 <!-- "Block": o e-mail não sai sem a confirmação.
                      Alternativa: "SoftBlock" (permite enviar se o suplemento estiver indisponível). -->
-                <LaunchEvent Type="OnMessageSend" FunctionName="onMessageSendHandler" SendMode="Block"/>
+                <LaunchEvent Type="OnMessageSend" FunctionName="onMessageSendHandler" SendMode="SoftBlock"/>
               </LaunchEvents>
               <SourceLocation resid="WebViewRuntime.Url"/>
             </ExtensionPoint>
